@@ -1,12 +1,14 @@
-##第二章 创建和摧毁对象
+>个人读书笔记，部分没读懂的知识点简洁概括或缺失，以后反复阅读后再完善。
 
-####第一条、使用静态工厂方法替代构造器
+#第二章 创建和摧毁对象
+
+####第1条:使用静态工厂方法替代构造器
 静态工厂方法的好处。
 
 1、有命名，更方便阅读。
-2、不用每次调用都创建新对象（构造器需要）
-3、可以返回原返回类型的任何子类型对象（更灵活）
-4、创建参数化类型实例使代码更简介
+2、不用每次调用都创建新对象（构造器需要）。
+3、可以返回原返回类型的任何子类型对象（更灵活）。
+4、创建参数化类型实例使代码更简洁。
 例子：
 
     public static <K, V> HashMap<K, V> newInstance() {
@@ -14,16 +16,18 @@
     }
         
     Map<String, List<String>> m =Singleton.newInstance();
+
 静态工厂方法的坏处。
 
 1、类如果不含有公有或者受保护的构造器，就不能被子类化。
 2、与静态方法没有区别（不方便阅读？）
+
 ####第2条:遇到多个构造器时要考虑用构建器
-类中有多个参数，一般的重叠构造器（telescoping constructor）有不好的地方，比如一些不想设置的参数也不得不传值。
+类中有多个参数，一般使用的重叠构造器（telescoping constructor）模式有不好的地方，比如有些不想设置的参数也不得不传值。
 
 解决办法提到了javaBeans模式与Builder模式。
 
-javaBeans:
+javaBeans模式:
 
     public class NutritionFacts {
         private int servingSize = -1;
@@ -115,7 +119,7 @@ Builder模式：
             carbohydrate=builder.carbohydrate;
         }
     }
-调用代码：
+Builder模式调用代码：
 
     NutritionFacts cocaCola = new NutritionFacts.Builder(240, 8)
                         .setCalories(100)
@@ -179,7 +183,7 @@ java 1.5之后实现Singleton的第三种方法：
 
 ####第5条：避免创建不必要的对象
 
-**最好能重用对象而不是每次需要的时候创建一个相同功能的新对象。**
+**最好能重用对象，而不是每次需要的时候创建一个相同功能的新对象。**
 极端例子：
 
     String s = new String("stringette");
@@ -188,7 +192,7 @@ java 1.5之后实现Singleton的第三种方法：
 
     String s = "stringette";
 
-有些已知不会被修改的可变对象，也可以重用。
+有些**已知不会被修改的可变对象**，也可以重用。
 重用前例子：
 
     class Person{
@@ -238,6 +242,7 @@ java 1.5之后实现Singleton的第三种方法：
         }
     }    
 
+
 **要优先使用基本类型而不是装箱基本类型，要当心无意识的自动装箱。**
 
 例子：
@@ -275,13 +280,13 @@ sum的声明是Long而不是long,意味着程序构造了许多的多余的Long�
                 throw new EmptyStackException();
             }
             //这样写会有内存泄漏
-            //return elements[--size];
+            return elements[--size];
             /*
             * 清空过期的引用
             * */
-            Object result = elements[--size];
-            elements[size]=null;
-            return result;
+            //Object result = elements[--size];
+            //elements[size]=null;
+            //return result;
         }
     
         private void ensureCapacity() {
@@ -291,6 +296,11 @@ sum的声明是Long而不是long,意味着程序构造了许多的多余的Long�
         }
     }
 
+代码中通过清空过期应用解决内存泄漏：
+
+    Object result = elements[--size];
+        elements[size]=null;
+        return result;
 ####第7条：避免使用过期方法
 
 讲终结方法（finalizer）通常不可预测，一般情况下是不必要的。
