@@ -11,6 +11,11 @@ public class PersonDemo {
             Person p=new Person(new Date());
             p.isBabyBoomer2();
             count++;
+            NutritionFacts cocaCola = new NutritionFacts.Builder(240, 8)
+                    .setCalories(100)
+                    .setSodium(35)
+                    .setCarbohydrate(27)
+                    .build();
         }
     }
 }
