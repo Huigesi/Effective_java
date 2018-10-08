@@ -5,8 +5,14 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class PersonDemo {
-
-
+    public static void main(String[] args) {
+        int count=0;
+        while (count < 10000000) {
+            Person p=new Person(new Date());
+            p.isBabyBoomer2();
+            count++;
+        }
+    }
 }
 class Person{
     private final Date birthDate;
@@ -28,7 +34,7 @@ class Person{
                 birthDate.compareTo(boomEnd) < 0;
     }
     /*
-     *
+     *改进后的做法(快了250倍)
      * */
     private static final Date BOOM_START;
     private static final Date BOOM_END;
