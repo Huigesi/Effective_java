@@ -15,7 +15,7 @@
             return new HashMap<>();
     }
         
-    Map<String, List<String>> m =Singleton.newInstance();
+    Map<String, List<String>> m =section2.Singleton.newInstance();
 
 静态工厂方法的坏处。
 
@@ -131,7 +131,7 @@ Builder模式调用代码：
 
 ####第3条：用私有构造器或者枚举类型强化Singleton属性
 
-**Singleton**指仅仅被实例化一次的类。
+**section2.Singleton**指仅仅被实例化一次的类。
 
 java 1.5以前，实现Singleton的两种方法：
 
