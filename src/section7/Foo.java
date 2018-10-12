@@ -1,0 +1,1 @@
+package section7;public class Foo {    int a1,a2,a3;    public Foo() {}    public Foo(int a1) {}    public Foo(int a1, int a2) {}    public Foo(int a1, int a2, int a3) {}    public Foo(int a1, int a2, int a3, int... rest) {}}
